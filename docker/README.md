@@ -9,6 +9,4 @@ cd docker
 
 Once it completes, you can run the server. For example:
 
-docker run --name=hello-world-1 \
- -p 0.0.0.0:8080:8080 -h `hostname` \
-  composer22/hello-world
+docker run -d -p 8080:8080 --name hello-world composer22/hello-world
