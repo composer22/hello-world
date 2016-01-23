@@ -3,12 +3,12 @@ package server
 import "time"
 
 const (
-	version                = "0.0.1"     // Application and server version.
-	DefaultHostName        = "localhost" // The hostname of the server.
-	DefaultPort            = 8080        // Port to receive requests: see IANA Port Numbers.
-	DefaultProfPort        = 0           // Profiler port to receive requests.*
-	DefaultMaxProcs        = 0           // Maximum number of computer processors to utilize.*
-	DefaultPollingInterval = 300         // Polling interval in seconds to check artifactory (5 min).
+	version                = "0.0.1"   // Application and server version.
+	DefaultHostName        = "0.0.0.0" // The hostname of the server.
+	DefaultPort            = 8080      // Port to receive requests: see IANA Port Numbers.
+	DefaultProfPort        = 0         // Profiler port to receive requests.*
+	DefaultMaxProcs        = 0         // Maximum number of computer processors to utilize.*
+	DefaultPollingInterval = 300       // Polling interval in seconds to check artifactory (5 min).
 
 	// * zeros = no change or no limitations or not enabled.
 
