@@ -1,0 +1,9 @@
+FROM gliderlabs/alpine
+MAINTAINER Bryan-Kirk Reinhardt
+RUN \
+apk --update add bash curl ca-certificates && \
+  mkdir -p /usr/local/bin/hello-world
+ADD hello-world /usr/local/bin/hello-world/hello-world
+CMD []
+ENTRYPOINT ["/usr/local/bin/hello-world/hello-world"]
+EXPOSE 8080
