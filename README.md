@@ -52,8 +52,8 @@ Content-Length: 0
 
 Three API routes are provided for service measurement:
 
-* http://localhost:8080/v1.0/health - GET: Is the server alive?
-* http://localhost:8080/v1.0/       - GET: return "hello World!"
+* http://localhost:8080/hello-world/v1.0/health - GET: Is the server alive?
+* http://localhost:8080/hello-world/v1.0/hello  - GET: return "hello World!"
 
 ## Building
 
