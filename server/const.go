@@ -6,15 +6,13 @@ const (
 	version                = "0.0.1"   // Application and server version.
 	DefaultHostName        = "0.0.0.0" // The hostname of the server.
 	DefaultPort            = 8080      // Port to receive requests: see IANA Port Numbers.
-	DefaultProfPort        = 0         // Profiler port to receive requests.*
-	DefaultMaxProcs        = 0         // Maximum number of computer processors to utilize.*
 	DefaultPollingInterval = 300       // Polling interval in seconds to check artifactory (5 min).
 
 	// * zeros = no change or no limitations or not enabled.
 
 	// http: routes.
-	httpRouteV1Health = "/v1.0/health"
-	httpRouteV1Hello  = "/v1.0/"
+	httpRouteV1Health = "/hello-world/v1.0/health"
+	httpRouteV1Hello  = "/hello-world/v1.0/hello"
 
 	// Connections.
 	TCPReadTimeout  = 10 * time.Second
