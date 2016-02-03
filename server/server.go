@@ -104,7 +104,7 @@ func (s *Server) healthHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("OK"))
 }
 
-// helloHandler returns "Hello World.
+// helloHandler returns "Hello World!".
 func (s *Server) helloHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello World!"))
 }
