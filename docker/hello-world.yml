@@ -1,0 +1,71 @@
+# Example compose file for running docker containers.
+#
+# Notes:
+#  - Default env variables are not supported from the command line for up command etc.
+#  - up creates a network for the services in the file
+#
+# Set up a network:
+#   docker network create hello_world
+#
+# First time, run it then scale it:
+#   COMPOSE_PASSED_PARAM_VAR="Passed Variable1" HELLO_WORLD_IMAGE_TAG="latest" \
+#     docker-compose -f hello-world.yml -p hwproj up -d --force-recreate
+#
+#   COMPOSE_PASSED_PARAM_VAR="Passed Variable1" HELLO_WORLD_IMAGE_TAG="latest" \
+#     docker-compose -f hello-world.yml -p hwproj scale hello_world=3
+#
+# Run it again to replace these instances:
+#   COMPOSE_PASSED_PARAM_VAR="Passed Variable2" HELLO_WORLD_IMAGE_TAG="latest" \
+#     docker-compose -f hello-world.yml -p hwproj up -d --force-recreate
+
+# Inspect the instances so you can see they were recreated
+# (see COMPOSE_PASSED_PARAM_VAR):
+#   docker inspect hwproj_hello_world_1
+#   docker inspect hwproj_hello_world_2
+#   docker inspect hwproj_hello_world_3
+#
+# Stop and destroy the instances:
+#   (best because everything is destroyed incl network)
+#   docker-compose -f hello-world.yml -p hwproj down
+#
+#   (keeps vol and network)
+#   docker-compose -f hello-world.yml -p hwproj stop
+#   docker-compose -f hello-world.yml -p hwproj rm --force
+#
+#  TODO:
+#    - test latest image pulls in a rotation of up, scale, up
+#    - test in swarm and see what network it should be in.
+#    - arch. a build pattern
+version: "2"
+
+services:
+  hello_world:
+    domainname: hello-world.com
+    env_file:
+      - ./hello-world.env
+    environment:
+      - HARDCODED_VAR="a hardcoded variable"
+      - PASSED_PARAM_VAR="${COMPOSE_PASSED_PARAM_VAR}"
+      - "constraint:com.example.role==slave"
+      - "affinity:container!=*_hello_world_*"
+    hostname: hello-world
+    image: composer22/hello-world:${HELLO_WORLD_IMAGE_TAG}
+    labels:
+      com.example.appgroup: "hello_world"
+    logging:
+      options:
+        env: "PASSED_PARAM_VAR"
+        labels: "com.example.appgroup"
+    mem_limit: 300M
+    memswap_limit: 300M
+    networks:
+      - hello_world
+    ports:
+      - "8080"
+    restart: always
+    volumes:
+      - /tmp:/tmp/test
+networks:
+  hello_world:
+    external:
+      name: hello_world
